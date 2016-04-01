@@ -27,3 +27,6 @@ class Solution {
         getSubset(result, path, nums, pos + 1);
     }
 }
+
+// solution2 fill every number to current pos
+
