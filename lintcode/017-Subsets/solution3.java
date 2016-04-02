@@ -23,6 +23,7 @@ class Solution {
                 }
             }
             
+            Collections.sort(path);
             result.add(new ArrayList<Integer>(path));
         }
         
