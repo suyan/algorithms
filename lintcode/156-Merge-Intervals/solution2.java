@@ -1,4 +1,3 @@
-// O(nlogn) and O(n)
 /**
  * Definition of Interval:
  * public class Interval {
@@ -15,11 +14,10 @@ class Solution {
      * @return: A new sorted interval list.
      */
     public List<Interval> merge(List<Interval> intervals) {
-        List<Interval> result = new ArrayList<>();
         if (intervals == null || intervals.size() == 0) {
-            return result;
+            return intervals;
         }
-        
+
         Collections.sort(intervals, new MyComparator());
 
         Interval prev = intervals.get(0);
@@ -28,17 +26,15 @@ class Solution {
             Interval curr = intervals.get(i);
             if (prev.end >= curr.start) {
                 prev.end = Math.max(prev.end, curr.end);
+                intervals.remove(i);
             } else {
-                result.add(prev);
                 prev = curr;
             }
         }
-        
-        result.add(prev);
 
-        return result;
+        return intervals;
     }
-    
+
     class MyComparator implements Comparator<Interval> {
         @Override
         public int compare(Interval i1, Interval i2) {
@@ -51,5 +47,4 @@ class Solution {
             }
         }
     }
-
 }

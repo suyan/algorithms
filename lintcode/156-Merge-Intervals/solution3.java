@@ -15,28 +15,25 @@ class Solution {
      * @return: A new sorted interval list.
      */
     public List<Interval> merge(List<Interval> intervals) {
-        List<Interval> result = new ArrayList<>();
         if (intervals == null || intervals.size() == 0) {
-            return result;
+            return intervals;
         }
         
         Collections.sort(intervals, new MyComparator());
 
-        Interval prev = intervals.get(0);
-        for (int i = 1; i < intervals.size(); i++) {
-            // if overlap
-            Interval curr = intervals.get(i);
+        ListIterator<Interval> it = intervals.listIterator();
+        Interval prev = it.next();
+        while (it.hasNext()) {
+            Interval curr = it.next();
             if (prev.end >= curr.start) {
                 prev.end = Math.max(prev.end, curr.end);
+                it.remove();
             } else {
-                result.add(prev);
                 prev = curr;
             }
         }
-        
-        result.add(prev);
 
-        return result;
+        return intervals;
     }
     
     class MyComparator implements Comparator<Interval> {
@@ -51,5 +48,4 @@ class Solution {
             }
         }
     }
-
 }
