@@ -34,8 +34,8 @@ public class Solution {
             return query(root.left, Math.max(start, root.start), end);
         } else {
             return Math.max(
-                query(root.left, start, mid),
-                query(root.right, mid + 1, end)
+                query(root.left, Math.max(start, root.start), mid),
+                query(root.right, mid + 1, Math.min(end, root.end))
                 );
         }
     }
