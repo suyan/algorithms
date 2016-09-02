@@ -3,35 +3,51 @@ public class Solution {
      * @param matrix a matrix of m x n elements
      * @return an integer list
      */
-    public ArrayList<Integer> spiralOrder(int[][] matrix) {
-        ArrayList<Integer> rst = new ArrayList<Integer>();
-        if(matrix == null || matrix.length == 0) {
-            return rst;
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> result = new ArrayList<>();
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return result;
         }
-        
-        int rows = matrix.length;
-        int cols = matrix[0].length;
-        int count = 0;
-        while(count * 2 < rows && count * 2 < cols){
-            for(int i = count; i < cols - count; i++) {
-                rst.add(matrix[count][i]);
+
+        int left = 0;
+        int right = matrix[0].length - 1;
+        int up = 0;
+        int down = matrix.length - 1;
+        // start point
+        int x = 0;
+        int y = 0;
+        while (y >= left && y <= right && x >= up && x <= down) {
+            // go right
+            for (y = left; y <= right && x >= up; y++) {
+                result.add(matrix[x][y]);
             }
-            
-            
-            for(int i = count+1; i< rows-count; i++)
-                rst.add(matrix[i][cols-count-1]);
-            
-            if(rows - 2 * count == 1 || cols - 2 * count == 1)  // if only one row /col remains
-                break;
-                
-            for(int i = cols-count-2; i>=count; i--)
-                rst.add(matrix[rows-count-1][i]);
-                
-            for(int i = rows-count-2; i>= count+1; i--)
-                rst.add(matrix[i][count]);
-            
-            count++;
+            y = right;
+            up++;
+
+            // go down
+            for (x = up; x <= down && y >= left; x++) {
+                result.add(matrix[x][y]);
+            }
+            x = down;
+            right--;
+
+            // go left
+            for (y = right; y >= left && x >= up; y--) {
+                result.add(matrix[x][y]);
+            }
+            y = left;
+            down--;
+
+            // go up
+            for (x = down; x >= up && y <= right ; x--) {
+                result.add(matrix[x][y]);
+            }
+            left++;
+
+            x = up;
+            y = left;
         }
-        return rst;
+
+        return result;
     }
 }
