@@ -36,6 +36,7 @@ public class Solution {
             }
         }
     }
+
     List<List<Integer>> print(HashSet<Integer> hashSet, UnionFind uf, int n) {
         List<List<Integer>> ans = new ArrayList<List<Integer>>();
         HashMap<Integer, List <Integer>> hashMap = new HashMap<Integer, List <Integer>>();
@@ -56,8 +57,6 @@ public class Solution {
     }
     
     public List<List<Integer>> connectedSet2(ArrayList<DirectedGraphNode> nodes){
-        // Write your code here
-        
         HashSet<Integer> hashSet = new HashSet<Integer>(); 
         for(DirectedGraphNode now : nodes){
             hashSet.add(now.label);
@@ -66,10 +65,8 @@ public class Solution {
             }
         }
         UnionFind uf = new UnionFind(hashSet);
-
         
         for(DirectedGraphNode now : nodes){
-            
             for(DirectedGraphNode neighbour : now.neighbors) {
                 int fnow = uf.find(now.label);
                 int fneighbour = uf.find(neighbour.label);
@@ -79,7 +76,6 @@ public class Solution {
             }
         }
         
-        
-        return print(hashSet , uf, nodes.size());
+        return print(hashSet, uf, nodes.size());
     }
 }
